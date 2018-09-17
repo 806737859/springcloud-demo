@@ -1,0 +1,34 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: microservice-gateway-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+#网关配置，默认所有从eureka中拉取的服务都会代理
+zuul:
+  #过滤不需要经过网关的服务
+  ignoredServices: '*' #过滤某个服务，多个用“,”分割，例如：microservice-consumer-movie-ribbon-with-hystrix，如果在routes中配置了，将不会被过滤
+  #路由规则配置：
+  #默认访问路径 http:{zuul.host}:{zuul.port}/{代理微服务的应用名称}/**
+  #路由后：http:{zuul.host}:{zuul.port}/{配置的路径}
+  routes:
+    xxx: # 路由规则的ip,保证唯一就可以
+      # path路径会转发到url对应的服务
+      path: /user-url/**
+      serviceId: microservice-provider-user
+
+#禁用ribbon的eureka，则不能负载均衡，因为没有服务列表可用
+ribbon:
+  eureka:
+    enabled: false
+
+#需要额外配置服务列表
+microservice-provider-user: #serviceId
+  ribbon:
+    listOfServers: http://localhost:7900,http://localhost:7901

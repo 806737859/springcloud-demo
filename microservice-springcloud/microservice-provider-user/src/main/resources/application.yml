@@ -1,0 +1,42 @@
+server:
+  port: 7911
+spring:
+  application:
+    name: microservice-provider-user
+  datasource:
+    name: springcloud
+    url: jdbc:mysql://localhost:3306/springcloud
+    username: root
+    password: root
+
+eureka:
+  client:
+  #健康检查
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      # 注册到eureka方式一：只有单个zone（eurekaServer）时，使用该配置
+      defaultZone: http://user:password123@localhost:8761/eureka  #http://peer1:8761/eureka/
+  # 服务实例信息显示配置
+  instance:
+    #自定义实例id，在eureka监控页中会显示
+    instanceId: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    #以ip地址注册到eureka，默认是主机名
+    prefer-ip-address: true
+    # 替换applicationname,填坑，当使用swagger-ui时，不使用appname会出现问题
+#    appname: microservice-provider-user
+    # 主机名
+#    hostname: user
+    # 租约更新时间间隔
+#    lease-renewal-interval-in-seconds: 10
+    # 租期到期时间
+#    lease-expiration-duration-in-seconds: 30
+    # 配置元信息
+#    metadata-map:
+    # 注册到eureka方式二：存在多个zone（eurekaServer）时，使用该配置
+#      zone: http://peer1:8761/eureka/
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.aws.springcloud.user.entity

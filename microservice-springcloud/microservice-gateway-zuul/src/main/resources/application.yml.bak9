@@ -1,0 +1,23 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: microservice-gateway-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+#网关配置，默认所有从eureka中拉取的服务都会代理
+zuul:
+  # （过滤不需要的请求头），配置后转发到被代理微服务的请求将不会包含下列头信息，默认是空的，效果等同于sensitive-headers
+  # 但是如果引入了spring-security将会初始化一些spring-security指定的头信息（也就是说会过滤spring-security指定的敏感头信息）
+  ignored-headers: Cookie,Set-Cookie,Authorization
+  # 配置false后将不会初始化spring-security指定的头信息，默认为true
+  ignore-security-headers: false
+  # （敏感信息全局配置），下游服务均共享安全信息
+  sensitive-headers:
+  routes:
+    microservice-provider-user: /user/**

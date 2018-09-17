@@ -1,0 +1,24 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: microservice-gateway-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+#网关配置，默认所有从eureka中拉取的服务都会代理
+zuul:
+  # （敏感信息全局配置），配置后转发到被代理微服务的请求将不会包含下列头信息
+  # 场景一：调用的微服务如果是外部的服务，则转发的请求不应该包含下面的信息（防止泄露）
+  # 场景二：调用的微服务如果是系统的一部分，则应该根据实际情况共享（默认值不是空，如果需要共享必须显式地指定，比如空列表）
+  sensitive-headers: Cookie,Set-Cookie,Authorization
+  routes:
+    xxx: #路由id,保证唯一就可以
+      path: /user/**
+      # 针对配置的微服务,局部配置敏感信息，优先级大于全局配置，这里的配置为所有敏感信息共享
+#      sensitive-headers:
+      serviceId: microservice-provider-user

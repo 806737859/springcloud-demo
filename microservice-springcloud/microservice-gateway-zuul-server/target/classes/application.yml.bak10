@@ -1,0 +1,41 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: microservice-gateway-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+#网关配置，默认所有从eureka中拉取的服务都会代理
+#绞杀者模式
+#http://insights.thoughtworkers.org/service-split-and-architecture-evolution/
+#https://www.martinfowler.com/bliki/BranchByAbstraction.html
+zuul:
+  routes:
+    #绞杀部分地址到新的服务
+    xxx: #路由别名,保证唯一就可以
+      path: /user/**
+      stripPrefix: false
+      serviceId: microservice-provider-user-v1
+    yyy: # 测试本地转发
+      path: /test/**
+      url: forward:/test2
+#    legacy: #其他请求使用旧系统服务
+#      path: /**
+#      url: # 一般为旧系统地址
+
+# /actuator/routes{/details} 查看服务路由url映射
+# /actuator/filters 查看所有的过滤器
+management:
+  #端口管理，默认只开启 health 和 info端口
+  endpoints:
+    web:
+      exposure:
+        # 过滤的端口，优先级高于include
+        exclude: env,beans
+        # 开放的端口
+        include: "*"

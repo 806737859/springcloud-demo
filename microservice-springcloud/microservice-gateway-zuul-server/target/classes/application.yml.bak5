@@ -1,0 +1,30 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: microservice-gateway-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+#网关配置，默认所有从eureka中拉取的服务都会代理
+zuul:
+  #前缀路由
+  #配置前缀后，所有要经过网关的请求都必须加上前缀
+  prefix: /api
+  #(全局配置)是否剥去前缀，(true:就是在转发之前会剥去前缀，譬如请求网关的url是 /api/user/** 转发后的地址就是 /user/***),默认为false
+  strip-prefix: true
+  #实例路由配置
+  routes:
+    xxx:  # 路由别名,保证唯一就可以
+      path: /user/**
+      serviceId: microservice-provider-user-v1
+      # 局部是否剥离前缀，一般适用于服务设置了上下文路径的场景
+      stripPrefix: false
+
+logging:
+  level:
+    com.netflix: debug

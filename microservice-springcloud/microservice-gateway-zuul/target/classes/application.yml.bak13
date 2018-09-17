@@ -1,0 +1,17 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: microservice-gateway-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+# 禁用过滤器 zuul.<SimpleClassName>.<filterType>.disable=true
+zuul:
+  SendResponseFilter:
+    post:
+      disable: true

@@ -1,0 +1,17 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: microservice-gateway-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+# 问题：在经过网关的时候，字符串编码可能会被Filter修改
+# 解决方案一：强制使用原始的参数编码方式
+# 解决方案二：复写SimpleHostRoutingFilter RequestContext.getCurrentContext().setRequestQueryParams(someOverriddenParameters)
+zuul:
+  forceOriginalQueryStringEncoding: true

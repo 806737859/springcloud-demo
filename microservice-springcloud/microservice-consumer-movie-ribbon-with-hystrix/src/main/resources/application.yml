@@ -1,0 +1,24 @@
+server:
+  port: 8010
+
+spring:
+  application:
+    name: microservice-consumer-movie-ribbon-with-hystrix
+
+eureka:
+  client:
+  #健康检查
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  # 服务实例信息显示配置
+  instance:
+    instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+
+# 开启一个实时监控hystrix的端点，譬如：http://localhost:8010/actuator/hystrix.stream
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream

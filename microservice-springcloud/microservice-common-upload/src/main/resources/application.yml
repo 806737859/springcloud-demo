@@ -1,0 +1,24 @@
+server:
+  port: 8050
+
+spring:
+  application:
+    name: microservice-common-uploads
+  servlet:
+    multipart:
+      max-file-size: 1000Mb # 最大单个文件的大小
+      max-request-size: 1500Mb  # 就一个请求内所有上传文件的大小
+
+eureka:
+  client:
+  #健康检查
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  # 服务实例信息显示配置
+  instance:
+    instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+
+
+

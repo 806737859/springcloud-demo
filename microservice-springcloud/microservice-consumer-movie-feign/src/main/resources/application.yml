@@ -1,0 +1,25 @@
+server:
+  port: 7901
+
+spring:
+  application:
+    name: microservice-consumer-movie-feign
+
+eureka:
+  client:
+    #存在多个zone时，如果需要优先访问相同zone的服务，可以配置该参数，如果该zone调用的服务down了，会调用失败
+    #此时可以开启ribbon的重试机制，访问其他zone的服务
+#    preferSameZoneEureka: true
+    #健康检查
+    healthcheck:
+      enabled: true
+    # 注册到eureka方式一：只有单个zone（eurekaServer）时，使用该配置
+    serviceUrl:
+      defaultZone: http://user:password123@localhost:8761/eureka  #http://peer1:8761/eureka/
+  # 服务实例信息显示配置
+  instance:
+    instanceId: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+    # 配置元信息
+#    metadata-map:
+    # 注册到eureka方式二：存在多个zone（eurekaServer）时，使用该配置
+#      zone: http://peer1:8761/eureka/
