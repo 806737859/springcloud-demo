@@ -23,5 +23,5 @@
 hs_err_pid*
 
 #文件夹
-**/target/
-**/.idea
+**/target/**
+**/.idea/**
