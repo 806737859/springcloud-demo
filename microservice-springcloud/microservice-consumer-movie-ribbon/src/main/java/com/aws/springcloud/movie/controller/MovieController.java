@@ -33,4 +33,12 @@ public class MovieController {
         return null;
     }
 
+    /**
+     * 访问异构服务的首页（真正的服务时node-server.js）
+     * @return
+     */
+    @GetMapping("/sidecar")
+    public String callSidecar(){
+        return restTemplate.getForObject("http://microservice-sidecar/", String.class);
+    }
 }

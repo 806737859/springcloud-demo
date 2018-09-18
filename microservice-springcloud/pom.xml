@@ -30,6 +30,7 @@
         <module>microservice-consumer-movie-feign-with-hystrix</module>
         <module>microservice-consumer-movie-feign-customizing-without-hystrix</module>
         <module>microservice-common-upload</module>
+        <module>microservice-sidecar</module>
     </modules>
 
     <!-- springboot -->

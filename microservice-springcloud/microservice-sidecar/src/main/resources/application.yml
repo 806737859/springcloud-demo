@@ -1,0 +1,40 @@
+server:
+  port: 5768
+spring:
+  application:
+    name: microservice-sidecar
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+# 异构服务配置（非JVM语言）
+# 建立异构服务和非异构服务之间的桥梁，可以简单认为这个sidecar就是异构服务（node-server.js）的对外代表
+# 所以访问sidecar就等于访问异构服务
+# 可以直接访问首页 http://sidecar.host:sidecar.port 可以查看一下关于sidecar的信息,定义在SidecarController.java
+# 场景一：
+# 使用RestTemplate（前提使用了ribbon和eureka）访问sidecar时，http://microservice-sidecar/ 等同于访问 http://localhost:8888/
+# 场景一：
+# 需要将sidecar注册到eureka，然后zuul代理sidecar，接着可以通过zuul访问sidecar(异构服务node-server.js)：zuulhost:zuulport/**
+# 如访问node-server.js实现的健康检查页面可以：localhost:8040/microservice-sidecar/health.json
+sidecar:
+  port: 8888   # 这个端口是异构服务的端口，比如node-server.js监听的8888端口
+  health-uri: http://localhost:8888/health.json   # 异构服务(例如node-server.js)需要实现健康检查页面，sidecar会将这个健康检查作为自己的健康检查
+
+management:
+  #端口管理，默认只开启 health 和 info端口
+  endpoints:
+    web:
+      exposure:
+        # 过滤的端口，优先级高于include
+        exclude: env,beans
+        # 开放的端口
+        include: "*"
+
+#logging:
+#  level:
+#    com.netflix: debug
+
+
