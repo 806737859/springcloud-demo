@@ -30,12 +30,6 @@
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
         <!-- 加入security后，eurekaServer会自动加上安全认证，并且生成动态秘钥 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
