@@ -19,7 +19,7 @@ http.createServer(function (request, response) {
     }else {
         response.end("404");
     }
-}).listen(8888);    //监听8888端口
+}).listen(8070);    //监听8888端口
 
 // 终端打印如下信息
 console.log('Server running at http://127.0.0.1:8888/');
