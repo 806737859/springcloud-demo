@@ -9,3 +9,5 @@ spring:
       server:
         git:
           uri: git@github.com:806737859/{application}  # ConfigServer后端存储url，及配置中心的git地址
+
+# 这种方式匹配的仓库就是{application}对应值的仓库
