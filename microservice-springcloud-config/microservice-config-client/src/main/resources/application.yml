@@ -1,0 +1,24 @@
+#server:
+#  port: 9999
+#spring:
+#  application:
+#      name: microservice-config-client    # 应用名称
+#  profiles:
+#    active: dev                   # 使用哪个剖面
+#  cloud:
+#    config:
+#      uri: http://localhost:8080  # ConfigServer的url
+#      label: master               # 配置中心的分支（如果ConfigServer后端存储是git，默认为naster）
+
+# 注意：上下文加载顺序
+# bootstrap.*   ——>   加载配置中心的配置   ——>   application.*
+# 所以这个应用程序在加载远程配置时使用的默认ConfigServer的url（http://localhost:8888），所以报错
+# 需要使用bootstrap.yml指定ConfigServer的url，才能正确加载
+
+# 优先级 远端>application>bootstrap
+
+# 上述配置，对应访问ConfigServer的url为http://localhost:8080/master/microservice-config-client-dev.yml
+# 只会在一个分支中获取
+# 首先，在master分支下的microservice-config-client-dev.yml文件内容作为属性资源
+# 如果没有匹配就为*-dev.yml，在没有就获取application.yml
+

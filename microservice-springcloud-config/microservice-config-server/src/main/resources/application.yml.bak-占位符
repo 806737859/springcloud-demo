@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+# 使用这种方式，可以实现每个微服务对应一个git仓库，有良好的隔离性
+# 其中{application}就是一个占位符，对应需要使用配置中心的微服务的spring.application.name
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@github.com:806737859/{application}  # ConfigServer后端存储url，及配置中心的git地址

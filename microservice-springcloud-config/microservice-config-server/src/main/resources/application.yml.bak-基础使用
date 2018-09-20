@@ -1,0 +1,9 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@github.com:806737859/springcloud-config.git  # ConfigServer后端存储url，及配置中心的git地址

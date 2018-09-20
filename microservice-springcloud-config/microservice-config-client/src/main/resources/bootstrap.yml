@@ -1,0 +1,11 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: microservice-config-client    # 应用名称
+  profiles:
+    active: dev                   # 使用哪个剖面
+  cloud:
+    config:
+      uri: http://localhost:8080  # ConfigServer的url
+      label: master               # 配置中心的分支（如果ConfigServer后端存储是git，默认为naster）
