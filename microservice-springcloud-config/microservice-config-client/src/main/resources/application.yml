@@ -18,7 +18,8 @@
 # 优先级 远端>application>bootstrap
 
 # 上述配置，对应访问ConfigServer的url为http://localhost:8080/master/microservice-config-client-dev.yml
-# 只会在一个分支中获取
-# 首先，在master分支下的microservice-config-client-dev.yml文件内容作为属性资源
-# 如果没有匹配就为*-dev.yml，在没有就获取application.yml
+# 只会在指定分支（如本例的master）中获取
+# 首先，在master分支下的获取microservice-config-client-dev.yml文件内容作为属性资源
+# 如果没有匹配master分支下*-dev.yml
+# 再没有就获取application.yml
 
