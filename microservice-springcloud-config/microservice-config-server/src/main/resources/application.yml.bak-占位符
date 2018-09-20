@@ -10,5 +10,7 @@ spring:
         git:
           uri: git@github.com:806737859/{application}  # ConfigServer后端存储url，及配置中心的git地址
 
-# 先匹配{application}对应值的仓库，然后匹配该仓库的文件
 # 可以实现每个微服务对应一个git仓库，有良好的隔离性（每个微服务对应一个仓库）
+# 一、仓库匹配
+1. 匹配{application}对应值的仓库
+# 二、在匹配成功的仓库中进行文件匹配

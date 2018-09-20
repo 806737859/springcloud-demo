@@ -1,0 +1,20 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@github.com:806737859/config-repo.git    # 默认的配置中心的git仓库，如果在repos中没有匹配的仓库则使用该仓库
+          clone-on-start: true                           # 全局有效（默认为是false，在第一次请求的时候clone），在Config-Server启动的时候去clone远程仓库到本地
+          repos:
+            simple: git@github.com:806737859/simple        # 只匹配spring.application.name=simple的微服务，并指定git仓库地址
+            xxx:
+              pattern: special*/dev*,special*/test*        # 匹配模式，{spring.application.name}/{spring.profiles.active},匹配的是微服务的属性
+              clone-on-start: false                        # 值针对repos中的xxx有效，也就是说启动的时候不会clone仓库git@github.com:806737859/special
+              uri: git@github.com:806737859/special         # 匹配pattern后，远程配置的git仓库地址
+
+
+# 本案例中说明cloneOnStart的作用
+# 主要用于启动ConfigServer时候检测所配置的url是否正确

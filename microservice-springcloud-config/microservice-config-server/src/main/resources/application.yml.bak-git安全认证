@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@github.com:806737859/config-repo.git # ConfigServer后端存储url，即配置中心的git地址
+          username: xxx # 用户名
+          password: xxx # 密码
+
+# 访问git仓库时，使用http安全认证，如果在.ssh有了相关配置，则不需要配置，具体参见5.1.1 Git Backend  Authentication

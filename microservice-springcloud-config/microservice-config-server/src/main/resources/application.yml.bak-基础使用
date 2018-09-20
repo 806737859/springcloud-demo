@@ -9,8 +9,7 @@ spring:
           uri: git@github.com:806737859/config-repo.git  # ConfigServer后端存储url，即配置中心的git地址
 
 # 只有一个仓库不需要匹配仓库，直接匹配仓库中的文件即可
-# 文件匹配规则
-# 两种情况：
+# 仓库文件匹配规则
 # 一、对于仓库中{application}-{profile}.yml格式的文件
 # 1.微服务的spring.application.name={application}并且spring.profiles.active={profile} ——> {application}-{profile}.yml
 # 2.微服务的spring.application.name!={application}并且spring.profiles.active={profile} ——> application-{profile}.yml
@@ -19,3 +18,4 @@ spring:
 # 1.微服务的spring.application.name={application} ——> {application}.yml
 # 2.其他情况均使用application.yml
 
+# 注意：对于使用仓库中的哪个分支，由微服务的{spring.cloud.label}属性决定

@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@github.com:806737859/config-repo.git    # 默认的配置中心的git仓库，如果在repos中没有匹配的仓库则使用该仓库
+          repos:
+            simple: git@github.com:806737859/simple        # 只匹配spring.application.name=simple的微服务，并指定git仓库地址
+            xxx:
+              pattern: special*/dev*,special*/test*        # 匹配模式，{spring.application.name}/{spring.profiles.active},匹配的是微服务的属性
+              uri: git@github.com:806737859/special         # 匹配pattern后，远程配置的git仓库地址
+#            local:
+#              pattern: local*
+#              uri: file:/home/configsvc/config-repo
+
+# 一、仓库匹配
+# 1.匹配repos中的仓库
+#   1.1 对于repos的配置是本例中的simple格式，simple就对应{application}
+#     微服务的spring.application.name=simple ——> 使用git@github.com:806737859/simple仓库
+#   1.2 对于repos的配置是本例中的xxx格式，xxx就不包含任何意义
+#     pattern可以有多个匹配模式（用逗号分隔），每个匹配模式的含义为{application}/{profile}
+#     对于第一个匹配模式（special*/dev*），微服务的spring.application.name匹配special*并且spring.profiles.active匹配dev* ——> 使用git@github.com:806737859/special仓库
+# 2.在repos中没有匹配的仓库，则使用默认仓库uri（即本例中的git@github.com:806737859/config-repo.git）
+# 二、在匹配成功的仓库中进行文件匹配

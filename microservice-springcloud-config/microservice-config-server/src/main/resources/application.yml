@@ -6,12 +6,8 @@ spring:
     config:
       server:
         git:
-          uri: git@github.com:806737859/config-repo.git    # 默认的配置中心的git仓库，如果在repos中没有匹配的仓库则使用该仓库
-#          repos:
-#            simple: git@github.com:806737859/simple        # 只匹配spring.application.name=simple的微服务，并指定git仓库地址
-#            special:
-#              pattern: special*/dev*,special*/test*         # 匹配模式，{spring.application.name}/{spring.profiles.active},匹配的是微服务的属性
-#              uri: git@github.com:806737859/special           # 匹配pattern后，远程配置的git仓库地址
-#            local:
-#              pattern: local*
-#              uri: file:/home/configsvc/config-repo
+          uri: git@github.com:806737859/config-repo.git # ConfigServer后端存储url，即配置中心的git地址
+          force-pull: true  # 全局配置，当本地仓库数据与远程仓库不一致时，会强制pull，防止本地仓库的脏数据（默认是false）
+
+# force-pull主要是解决ConfigServer克隆的仓库与远程git的仓库不同步的问题
+# 这个属性也可以作用于每个repos中

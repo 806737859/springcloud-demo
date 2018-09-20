@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@github.com:806737859/config-repo.git # ConfigServer后端存储url，即配置中心的git地址
+          delete-untracked-branches: true # 删除本地clone仓库没有被跟踪的分支（默认是false，只有ConfigServer重启的时候才会删除）
+
+# delete-untracked-branches这个属性还可以被微服务引用
+# 例如--spring.cloud.config.label=deletedRemoteBranch,master
+# 他将会从ConfigServer克隆的仓库的本地分支获取属性文件
