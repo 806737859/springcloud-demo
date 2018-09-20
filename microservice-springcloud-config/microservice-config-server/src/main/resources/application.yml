@@ -1,28 +1,17 @@
 server:
   port: 8080
 
-# 使用这种方式，可以实现每个微服务对应一个git仓库，有良好的隔离性
-# 其中{application}就是一个占位符，对应需要使用配置中心的微服务的spring.application.name
 spring:
   cloud:
     config:
       server:
         git:
-          uri: https://github.com/806737859/springcloud-demo/tree/master/springcloud-config/springcloud-config
-#          uri: https://github.com/806737859/springcloud-demo/springcloud-config/springcloud-config
-#          uri: git@github.com:806737859/{application}  # ConfigServer后端存储url，及配置中心的git地址
-
-#spring:
-#  cloud:
-#    config:
-#      server:
-#        git:
-#          uri: git@github.com:806737859/config-repo.git    # 默认的配置中心的git仓库
+          uri: git@github.com:806737859/config-repo.git    # 默认的配置中心的git仓库，如果在repos中没有匹配的仓库则使用该仓库
 #          repos:
-#            simple: git@github.com:806737859/simple        # 只匹配spring.application.name=simple的微服务
+#            simple: git@github.com:806737859/simple        # 只匹配spring.application.name=simple的微服务，并指定git仓库地址
 #            special:
-#              pattern: special*/dev*,*special*/dev*        
-#              uri: git@github.com:806737859/special
+#              pattern: special*/dev*,special*/test*         # 匹配模式，{spring.application.name}/{spring.profiles.active},匹配的是微服务的属性
+#              uri: git@github.com:806737859/special           # 匹配pattern后，远程配置的git仓库地址
 #            local:
 #              pattern: local*
 #              uri: file:/home/configsvc/config-repo
