@@ -17,12 +17,11 @@ spring:
 #    config:
 #      server:
 #        git:
-#          # 默认的配置中心的git地址
-#          uri: git@github.com:806737859/
+#          uri: git@github.com:806737859/config-repo.git    # 默认的配置中心的git仓库
 #          repos:
-#            simple: git@github.com:806737859/simple
+#            simple: git@github.com:806737859/simple        # 只匹配spring.application.name=simple的微服务
 #            special:
-#              pattern: special*/dev*,*special*/dev*
+#              pattern: special*/dev*,*special*/dev*        
 #              uri: git@github.com:806737859/special
 #            local:
 #              pattern: local*
