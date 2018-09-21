@@ -1,0 +1,11 @@
+encrypt:
+  key: aws
+
+# 对称加密的秘钥，必须写在bootstrap.yml中，在application.yml中无效
+# 有关对称加密的博文：https://www.cnblogs.com/labimeilexin/p/7350448.html
+
+# 可以通过ConfigServer暴露两个端口/encrypt和/decrypt进行测试
+# 加密测试，对字符串jhgj加密，会返回一个密文
+# curl http://localhost:8080/encrypt -d jhgj
+# 解密测试
+# curl http://localhost:8080/decrypt -d <密文>

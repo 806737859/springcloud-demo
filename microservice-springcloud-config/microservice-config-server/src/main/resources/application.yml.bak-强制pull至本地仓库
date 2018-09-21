@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    config:
+      server:
+        git:
+          uri: git@github.com:806737859/config-repo.git # ConfigServer后端存储url，即配置中心的git地址
+          force-pull: true  # 全局配置，当本地仓库数据与远程仓库不一致时，会强制pull，防止本地仓库的脏数据（默认是false）
+
+# force-pull主要是解决ConfigServer克隆的仓库与远程git的仓库不同步的问题
+# 这个属性也可以作用于每个repos中

@@ -1,6 +1,6 @@
-package com.aws.springcloud.configclient.controller;
+package com.aws.springcloud.configServer.controller;
 
-import com.aws.springcloud.configclient.properties.MyConfig;
+import com.aws.springcloud.configServer.properties.MyConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

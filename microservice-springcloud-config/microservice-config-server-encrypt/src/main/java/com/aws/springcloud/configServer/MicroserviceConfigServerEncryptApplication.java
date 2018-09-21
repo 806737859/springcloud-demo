@@ -1,4 +1,4 @@
-package com.aws.springcloud.configclient;
+package com.aws.springcloud.configServer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,8 +26,8 @@ import org.springframework.cloud.config.server.EnableConfigServer;
  */
 @EnableConfigServer
 @SpringBootApplication
-public class MicroserviceConfigServerApplication {
+public class MicroserviceConfigServerEncryptApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MicroserviceConfigServerApplication.class,args);
+        SpringApplication.run(MicroserviceConfigServerEncryptApplication.class,args);
     }
 }
