@@ -14,7 +14,7 @@ encrypt:
 # 注意：必须配置在bootstrap.yml中，在application.yml中无效
 # 概述：改配置采用的是非对称加密，即存在一个公钥和一个私钥，公钥加密只能用私钥解密，私钥加密只能用公钥解密
 # 作用：同样是保证git上配置文件的安全性，比对称加密的方式安全性更高
-# 配置：其实就是配置keytool证书（JDK中有一个keytool工具，用于生成证书，http://www.micmiu.com/lang/java/keytool-start-guide/）
+# 配置：其实就是配置keytool证书（JDK中有一个keytool工具，用于生成证书，http://www.micmiu.com/lang/java/keytool-start-guide/；https://blog.csdn.net/yu829/article/details/20240401）
 
 # 一下跟非对称加密相同
 # 测试：
