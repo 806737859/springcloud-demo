@@ -1,0 +1,31 @@
+encrypt:
+  key-store:                          # 密钥库配置
+    location: classpath:/server.jks   # 密钥库文件的位置
+    password: letmein                 # 对应证书中的storepass 密钥库的密码
+    alias: mytestkey                   # 对应证书中的alias 密钥库的别名
+    secret: changeme                   #  对应证书中的keypass 指定别名条目的密码
+
+# 本案例中证书生成方式
+# keytool -genkeypair -alias mytestkey -keyalg RSA
+# -dname "CN=Web Server,OU=Unit,O=Organization,L=City,S=State,C=US"
+# -keypass changeme -keystore server.jks -storepass letmein
+
+# 对称加密配置
+# 注意：必须配置在bootstrap.yml中，在application.yml中无效
+# 概述：改配置采用的是非对称加密，即存在一个公钥和一个私钥，公钥加密只能用私钥解密，私钥加密只能用公钥解密
+# 作用：同样是保证git上配置文件的安全性，比对称加密的方式安全性更高
+# 配置：其实就是配置keytool证书（JDK中有一个keytool工具，用于生成证书，http://www.micmiu.com/lang/java/keytool-start-guide/）
+
+# 一下跟非对称加密相同
+# 测试：
+# 1.通过ConfigServer暴露的端点/encrypt对明文（字符串）进行加密——>得到一个密文
+# 2.通过ConfigServer暴露的端点/decrypt对密文进行解密——>得到一个明文
+# 使用：
+# 1.调用ConfigServer暴露的端点/encrypt将需要加密的明文（例如数据库密码）进行加密——>得到数据库密码的密文（假设是：XXXX）
+# 2.在git远程仓库中的配置文件（.yml）的某个属性的值用'{cipher}XXXX'（如果是properties则没有引号）代替
+# 3.当微服务ConfigClient通过ConfigServer获取该配置文件时，ConfigServer对该配置文件中{cipher}开头的属性值进行解密，完成后返回没有加密的配置文件给ConfigClietn
+# 案例：
+# 加密测试，对字符串jhgj加密，会返回一个密文（190af75f2d6d22fe9c7438de52912e657b1b4e5b806dbb04e44a226d3bb2c7fd）
+# POST curl http://localhost:8080/encrypt -d jhgj
+# 解密测试，返回加密前的明文jhgj
+# POST curl http://localhost:8080/decrypt -d 190af75f2d6d22fe9c7438de52912e657b1b4e5b806dbb04e44a226d3bb2c7fd
