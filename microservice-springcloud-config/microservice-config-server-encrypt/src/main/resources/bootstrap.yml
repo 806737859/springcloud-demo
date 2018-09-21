@@ -14,6 +14,6 @@ encrypt:
 # 3.当微服务ConfigClient通过ConfigServer获取该配置文件时，ConfigServer对该配置文件中{cipher}开头的属性值进行解密，完成后返回没有加密的配置文件给ConfigClietn
 # 案例：
 # 加密测试，对字符串jhgj加密，会返回一个密文（190af75f2d6d22fe9c7438de52912e657b1b4e5b806dbb04e44a226d3bb2c7fd）
-# curl http://localhost:8080/encrypt -d jhgj
+# POST curl http://localhost:8080/encrypt -d jhgj
 # 解密测试，返回加密前的明文jhgj
-# curl http://localhost:8080/decrypt -d 190af75f2d6d22fe9c7438de52912e657b1b4e5b806dbb04e44a226d3bb2c7fd
+# POST curl http://localhost:8080/decrypt -d 190af75f2d6d22fe9c7438de52912e657b1b4e5b806dbb04e44a226d3bb2c7fd
