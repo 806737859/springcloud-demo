@@ -1,11 +1,19 @@
 encrypt:
-  key: aws
+  key: mysecurety   # 对称加密的秘钥
 
-# 对称加密的秘钥，必须写在bootstrap.yml中，在application.yml中无效
-# 有关对称加密的博文：https://www.cnblogs.com/labimeilexin/p/7350448.html
-
-# 可以通过ConfigServer暴露两个端口/encrypt和/decrypt进行测试
-# 加密测试，对字符串jhgj加密，会返回一个密文
+# 注意：对称加密的秘钥（encrypt.key），必须配置在bootstrap.yml中，在application.yml中无效
+# 概述：这种配置采用的是对称加密：即加解密都使用一个秘钥encrypt.key，加解密都在ConfigServer中完成
+# 作用：为了存储在git上的配置文件的某些属性的安全，防止泄露
+# 配置：在ConfigServer的bootstrap.yml中配置秘钥encrypt.key（在加解密中内部会使用到）
+# 测试：
+# 1.通过ConfigServer暴露的端点/encrypt对明文（字符串）进行加密——>得到一个密文
+# 2.通过ConfigServer暴露的端点/decrypt对密文进行解密——>得到一个明文
+# 使用：
+# 1.调用ConfigServer暴露的端点/encrypt将需要加密的明文（例如数据库密码）进行加密——>得到数据库密码的密文（假设是：XXXX）
+# 2.在git远程仓库中的配置文件（.yml）的某个属性的值用'{cipher}XXXX'（如果是properties则没有引号）代替
+# 3.当微服务ConfigClient通过ConfigServer获取该配置文件时，ConfigServer对该配置文件中{cipher}开头的属性值进行解密，完成后返回没有加密的配置文件给ConfigClietn
+# 案例：
+# 加密测试，对字符串jhgj加密，会返回一个密文（190af75f2d6d22fe9c7438de52912e657b1b4e5b806dbb04e44a226d3bb2c7fd）
 # curl http://localhost:8080/encrypt -d jhgj
-# 解密测试
-# curl http://localhost:8080/decrypt -d <密文>
+# 解密测试，返回加密前的明文jhgj
+# curl http://localhost:8080/decrypt -d 190af75f2d6d22fe9c7438de52912e657b1b4e5b806dbb04e44a226d3bb2c7fd
