@@ -8,4 +8,4 @@ spring:
   cloud:
     config:
       uri: http://user:password123@localhost:8080  # ConfigServer的url，并且使用了用户名和密码
-      label: master               # 配置中心的分支（如果ConfigServer后端存储是git，默认为naster）
+      label: master # 配置中心的分支（如果ConfigServer后端存储是git，默认为naster）

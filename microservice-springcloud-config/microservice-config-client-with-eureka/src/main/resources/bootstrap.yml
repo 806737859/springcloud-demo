@@ -12,6 +12,8 @@ spring:
         service-id: microservice-config-server-with-eureka  # configServer的serviceId
       label: master # 配置中心的分支（如果ConfigServer后端存储是git，默认为naster）
 #      fail-fast: true  # 当无法从eureka中获取configServer的地址时，会快速的抛出异常（默认是false）
+#      username:  ConfigServer配置的spring.security.user.name
+#      password:  ConfigServer配置的spring.security.user.password
 
 # 将ConfigServer注册到eureka
 eureka:
