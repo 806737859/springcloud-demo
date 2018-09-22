@@ -1,0 +1,27 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: microservice-config-client-with-eureka   # 应用名称
+  profiles:
+    active: dev                   # 使用哪个剖面
+  cloud:
+    config:
+      discovery:
+        enabled: true  # 开启从eureka中获取配置服务器（默认为false）
+        service-id: microservice-config-server-with-eureka  # configServer的serviceId
+      label: master # 配置中心的分支（如果ConfigServer后端存储是git，默认为naster）
+#      fail-fast: true  # 当无法从eureka中获取configServer的地址时，会快速的抛出异常（默认是false）
+
+# 将ConfigServer注册到eureka
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:password123@localhost:8761/eureka
+  instance:
+    #以ip地址注册到eureka，默认是主机名
+    prefer-ip-address: true
+
+# 案例说明：这种方式适用于ConfigServer高可用的情况
+# 1.从eureka中获取ServiceId是microservice-config-server-with-eureka配置服务器
+# 2.配置服务器依据ConfigClient属性（application、profile、label）获取配置文件

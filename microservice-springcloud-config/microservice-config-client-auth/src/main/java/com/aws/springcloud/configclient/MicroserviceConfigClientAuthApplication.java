@@ -1,11 +1,11 @@
-package com.aws.springcloud.configServer;
+package com.aws.springcloud.configclient;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MicroserviceConfigClientApplication {
+public class MicroserviceConfigClientAuthApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MicroserviceConfigClientApplication.class,args);
+        SpringApplication.run(MicroserviceConfigClientAuthApplication.class,args);
     }
 }

@@ -1,4 +1,4 @@
-package com.aws.springcloud.configServer.properties;
+package com.aws.springcloud.configclient.properties;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
