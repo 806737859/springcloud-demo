@@ -7,6 +7,11 @@ spring:
     active: dev                   # 使用哪个剖面
   cloud:
     config:
-      uri: http://localhost:8080  # ConfigServer的url
+      uri: http://localhost:8080  # ConfigServer的url，多个用逗号分隔
       label: master # 配置中心的分支（如果ConfigServer后端存储是git，默认为naster）
       fail-fast: true # 当无法连接到http://localhost:8080，会快速抛出异常
+
+# 属性可以复写
+# spring.cloud.config.name 复写 spring.application.name
+# spring.cloud.config.profile 复写 spring.profiles.active
+# spring.cloud.config.label 复写 master
