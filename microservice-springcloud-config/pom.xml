@@ -13,6 +13,8 @@
         <module>microservice-config-server</module>
         <module>microservice-config-server-encrypt</module>
         <module>microservice-config-server-encrypt-rsa</module>
+		<module>microservice-config-server-auth</module>
+        <module>microservice-config-client-auth</module>
     </modules>
 
     <!-- springboot -->
