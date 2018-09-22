@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>microservice-config-server-with-eureka</artifactId>
+    <artifactId>microservice-config-client-refresh</artifactId>
     <packaging>jar</packaging>
 
-    <name>microservice-config-server-with-eureka</name>
+    <name>microservice-config-client-refresh</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
@@ -23,15 +23,19 @@
     </properties>
 
     <dependencies>
-        <!-- configServer依赖 -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-config-server</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!-- uereka-client，在springcloud2.0后，加入该配置后自动成为一个eurekaclinet，无需配置@EnableEurekaClient -->
+        <!-- configClient依赖，从远端获取配置文件 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
 </project>

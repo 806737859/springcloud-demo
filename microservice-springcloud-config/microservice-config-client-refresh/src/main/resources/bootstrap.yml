@@ -1,0 +1,25 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: microservice-config-client-refresh    # 应用名称
+  profiles:
+    active: dev                   # 使用哪个剖面
+  cloud:
+    config:
+      uri: http://localhost:8080  # ConfigServer的url，多个用逗号分隔
+      label: master # 配置中心的分支（如果ConfigServer后端存储是git，默认为naster）
+
+management:
+  #端口管理，默认只开启 health 和 info端口
+  endpoints:
+    web:
+      exposure:
+        # 过滤的端口，优先级高于include
+        exclude: env,beans
+        # 开放的端口
+        include: "*"
+
+# 本案例测试当git上的配置文件修改后，会刷新MyConfig这个Bean
+# 调用/actuator/refresh端点，也就是重新获取git配置文件
+# 注意：@RefreshScope尽量不要和@Configuration一起使用

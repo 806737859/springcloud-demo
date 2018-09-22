@@ -17,6 +17,7 @@
         <module>microservice-config-client-auth</module>
         <module>microservice-config-server-with-eureka</module>
         <module>microservice-config-client-with-eureka</module>
+        <module>microservice-config-client-refresh</module>
     </modules>
 
     <!-- springboot -->

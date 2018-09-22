@@ -7,3 +7,4 @@ spring:
       server:
         git:
           uri: git@github.com:806737859/config-repo.git
+          force-pull: true
