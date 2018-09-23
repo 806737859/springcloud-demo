@@ -15,5 +15,6 @@
 </dependency>
 ```
 参考地址：https://docs.spring.io/spring-boot/docs/2.0.5.RELEASE/reference/htmlsingle/#production-ready
+    
 2. 服务重构相关
 绞杀者模式：SpringCloud文档章节：18.7 Strangulation Patterns and Local Forwards
