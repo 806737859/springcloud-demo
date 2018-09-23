@@ -1,1 +1,3 @@
-1.springcloud-config的使用
+### springcloud-config的使用
+- 遗留问题
+当远程git仓库配置文件修改后，所有使用该配置且正在运行的微服务自动刷新或者批量刷新配置？
